@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="testing.css">
+    <title>Testing</title>
+</head>
+<body>
+
+    <div class="content">
+        <h1>JavaScript colorChanger() Hands-On</h1>
+        <h1>JavaScript colorChanger() Hands-On</h1>
+    </div>
+    <div id="container">
+    <div id="color">
+        <div class="switch-container">
+            <button id="modeSwitch" class="switch"></button> 
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <button id="changecolor">Change <span style="color: yellow">Color</span></button> 
+</div>
+    <script>
+        const colorBox = document.getElementById("color");
+        let changeColor = document.getElementById("changecolor");
+        let modeSwitch = document.getElementById('modeSwitch');
+
+        changeColor.addEventListener("click", changecolor);
+        modeSwitch.addEventListener('click', toggleMode);
+
+        function changecolor() {
+            if (colorBox.style.backgroundColor === "green") {
+                colorBox.style.backgroundColor = "blue";
+            } else {
+                colorBox.style.backgroundColor = "green";
+            }
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>
