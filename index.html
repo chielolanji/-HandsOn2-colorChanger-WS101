@@ -1,49 +1,926 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="testing.css">
-    <title>Testing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#ffd6e7,#fff4f8);
+    overflow:hidden;
+}
+
+/* OPEN BUTTON */
+
+.start{
+    text-align:center;
+}
+
+.start button{
+    padding:16px 35px;
+    border:none;
+    border-radius:50px;
+    background:#ff4d79;
+    color:white;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+    transition:.3s;
+}
+
+.start button:hover{
+    transform:scale(1.08);
+}
+
+
+/* QUIZ */
+
+.quiz{
+    display:none;
+    text-align:center;
+    width:420px;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    animation:pop .6s;
+}
+
+
+/* SYMBOL REVEAL */
+
+.reveal{
+    min-height:75px;
+    margin-bottom:25px;
+    padding:10px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.symbol{
+    width:55px;
+    height:55px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#ff4d79;
+    color:white;
+
+    border-radius:12px;
+
+    font-size:25px;
+    font-weight:bold;
+
+    box-shadow:0 5px 12px rgba(255,77,121,.3);
+
+    animation:letterPop .5s;
+}
+
+
+/* QUESTION */
+
+.question-number{
+    color:#aaa;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.quiz h2{
+    color:#ff4d79;
+    margin-bottom:25px;
+    line-height:1.4;
+}
+
+
+/* BUTTONS */
+
+button{
+    padding:12px 25px;
+    margin:8px;
+
+    border:none;
+    border-radius:50px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+.answer{
+    background:#ff4d79;
+    color:white;
+    min-width:140px;
+}
+
+.wrong{
+    background:#ff4d79;
+    color:white;
+}
+
+
+/* FINAL MESSAGE */
+
+.final{
+    display:none;
+
+    text-align:center;
+
+    width:450px;
+
+    background:white;
+
+    padding:40px 30px;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+    animation:pop .6s;
+}
+
+.final h1{
+    color:#ff4d79;
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.final p{
+    color:#555;
+    font-size:18px;
+    line-height:1.7;
+}
+
+
+/* FINAL BUTTONS */
+
+.final-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-top:15px;
+}
+
+.replay{
+    background:#ff4d79;
+    color:white;
+}
+
+.letter-button{
+    background:#ffb3c7;
+    color:white;
+}
+
+
+/* LETTER */
+
+.letter{
+    display:none;
+
+    width:450px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+    animation:pop .6s;
+}
+
+.letter h2{
+    color:#ff4d79;
+    margin-bottom:20px;
+}
+
+.letter p{
+    color:#555;
+    line-height:1.8;
+    font-size:16px;
+}
+
+
+/* LETTER BUTTONS */
+
+.letter-buttons{
+    margin-top:20px;
+}
+
+.back{
+    background:#ddd;
+    color:#555;
+}
+
+.replay-letter{
+    background:#ff4d79;
+    color:white;
+}
+
+
+/* HEARTS */
+
+.heart{
+    position:absolute;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    animation:explode linear forwards;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes letterPop{
+
+    0%{
+        transform:scale(0);
+        opacity:0;
+    }
+
+    70%{
+        transform:scale(1.2);
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+
+@keyframes explode{
+
+    0%{
+        transform:
+        translate(0,0)
+        scale(.3)
+        rotate(0deg);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+        translate(
+            calc(var(--x)*1px),
+            calc(var(--y)*1px)
+        )
+        scale(1.8)
+        rotate(720deg);
+
+        opacity:0;
+    }
+
+}
+
+
+@keyframes pop{
+
+    from{
+        transform:
+        translateY(60px)
+        scale(.5);
+
+        opacity:0;
+    }
+
+    to{
+        transform:
+        translateY(0)
+        scale(1);
+
+        opacity:1;
+    }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="content">
-        <h1>JavaScript colorChanger() Hands-On</h1>
-        <h1>JavaScript colorChanger() Hands-On</h1>
-    </div>
-    <div id="container">
-    <div id="color">
-        <div class="switch-container">
-            <button id="modeSwitch" class="switch"></button> 
-        </div>
-        <br>
-        <br>
-        <br>
-    </div>
+<!-- START -->
 
-    <button id="changecolor">Change <span style="color: yellow">Color</span></button> 
+<div class="start" id="start">
+
+```
+<button onclick="startQuiz()">
+    Open Me ❤️
+</button>
+```
+
 </div>
-    <script>
-        const colorBox = document.getElementById("color");
-        let changeColor = document.getElementById("changecolor");
-        let modeSwitch = document.getElementById('modeSwitch');
 
-        changeColor.addEventListener("click", changecolor);
-        modeSwitch.addEventListener('click', toggleMode);
+<!-- QUIZ -->
 
-        function changecolor() {
-            if (colorBox.style.backgroundColor === "green") {
-                colorBox.style.backgroundColor = "blue";
-            } else {
-                colorBox.style.backgroundColor = "green";
-            }
+<div class="quiz" id="quiz">
+
+```
+<!-- SYMBOLS APPEAR HERE -->
+
+<div class="reveal" id="reveal"></div>
+
+
+<div class="question-number" id="questionNumber">
+    Question 1 of 6
+</div>
+
+
+<h2 id="question"></h2>
+
+
+<div id="answers"></div>
+```
+
+</div>
+
+<!-- FINAL -->
+
+<div class="final" id="final">
+
+```
+<h1>I LOVE YOU ❤️</h1>
+
+<p>
+
+    You found all the elements... 🥹
+
+    <br><br>
+
+    <b>I • Lu • V • Y • O • U</b>
+
+    <br><br>
+
+    Maybe chemistry really does know
+    what my heart wants to say. ❤️
+
+</p>
+
+
+<div class="final-buttons">
+
+    <button class="replay" onclick="restart()">
+        Replay ❤️
+    </button>
+
+    <button class="letter-button" onclick="showLetter()">
+        Read My Letter 💌
+    </button>
+
+</div>
+```
+
+</div>
+
+<!-- LOVE LETTER -->
+
+<div class="letter" id="letter">
+
+```
+<h2>💌 My Love</h2>
+
+<p>
+
+   AKI—three letters, they say, just an endearment.
+But to me, you have never been just a name.
+
+AKI means something more.
+Something clear and beautiful, like crystal catching the light,
+bringing a little warmth to a world that can sometimes feel weary.
+Somehow, those three letters became a place my heart knows as home.
+
+Happy 2nd monthsary, baby. 🤍
+
+I’ll keep choosing “but I love you” over “I love you, but”—
+because my love for you will never come with a condition.
+I love you, and that is where my heart chooses to remain.
+
+Thank you for making space for me
+even when your life is already full of your own becoming,
+your dreams, your growth, and all the pieces of yourself still unfolding.
+
+And whether I get to see you or not,
+whether you’re close enough to hold or only close enough to miss,
+I’ll still love you.
+
+Not because I have to,
+but because, somehow, in this life,
+you are still the person my heart keeps choosing.
+
+
+
+</p>
+
+
+<div class="letter-buttons">
+
+    <button class="back" onclick="backToFinal()">
+        Back ❤️
+    </button>
+
+    <button class="replay-letter" onclick="restart()">
+        Replay ❤️
+    </button>
+
+</div>
+```
+
+</div>
+
+<script>
+
+
+/* QUESTIONS */
+
+const questions = [
+
+{
+    symbol:"I",
+
+    question:
+    "What does the symbol I stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Iodine ",
+            correct:true
+        },
+
+        {
+            text:"Iron",
+            correct:false
+        },
+
+        {
+            text:"Indium",
+            correct:false
+        }
+    ]
+},
+
+
+{
+    symbol:"Lu",
+
+    question:
+    "What does the symbol Lu stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Lutetium ",
+            correct:true
+        },
+
+        {
+            text:"Lithium",
+            correct:false
+        },
+
+        {
+            text:"Lanthanum",
+            correct:false
+        }
+    ]
+},
+
+
+{
+    symbol:"V",
+
+    question:
+    "What does the symbol V stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Vanadium ",
+            correct:true
+        },
+
+        {
+            text:"Vanilla",
+            correct:false
+        },
+
+        {
+            text:"Violet",
+            correct:false
+        }
+    ]
+},
+
+
+{
+    symbol:"Y",
+
+    question:
+    "What does the symbol Y stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Yttrium ",
+            correct:true
+        },
+
+        {
+            text:"Ytterbium",
+            correct:false
+        },
+
+        {
+            text:"Yellowium",
+            correct:false
+        }
+    ]
+},
+
+
+{
+    symbol:"O",
+
+    question:
+    "What does the symbol O stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Oxygen ",
+            correct:true
+        },
+
+        {
+            text:"Osmium",
+            correct:false
+        },
+
+        {
+            text:"Gold",
+            correct:false
+        }
+    ]
+},
+
+
+{
+    symbol:"U",
+
+    question:
+    "What does the symbol U stand for in the Periodic Table? 🧪",
+
+    answers:[
+        {
+            text:"Uranium ",
+            correct:true
+        },
+
+        {
+            text:"Utopia",
+            correct:false
+        },
+
+        {
+            text:"Ununium",
+            correct:false
+        }
+    ]
+}
+
+];
+
+
+let currentQuestion = 0;
+
+
+/* ELEMENT SYMBOLS */
+
+const start =
+document.getElementById("start");
+
+const quiz =
+document.getElementById("quiz");
+
+const question =
+document.getElementById("question");
+
+const answers =
+document.getElementById("answers");
+
+const questionNumber =
+document.getElementById("questionNumber");
+
+const reveal =
+document.getElementById("reveal");
+
+const final =
+document.getElementById("final");
+
+const letter =
+document.getElementById("letter");
+
+
+
+/* START QUIZ */
+
+function startQuiz(){
+
+    start.style.display="none";
+
+    quiz.style.display="block";
+
+    currentQuestion=0;
+
+    reveal.innerHTML="";
+
+    showQuestion();
+
+}
+
+
+
+/* SHOW QUESTION */
+
+function showQuestion(){
+
+    const current =
+    questions[currentQuestion];
+
+
+    questionNumber.innerHTML =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+    question.innerHTML =
+    current.question;
+
+
+    answers.innerHTML="";
+
+
+    current.answers.forEach(answer => {
+
+        const button =
+        document.createElement("button");
+
+
+        button.innerHTML =
+        answer.text;
+
+
+        button.className =
+        answer.correct
+        ? "answer"
+        : "wrong";
+
+
+        button.onclick = () =>
+        checkAnswer(answer.correct);
+
+
+        answers.appendChild(button);
+
+    });
+
+}
+
+
+
+/* CHECK ANSWER */
+
+function checkAnswer(correct){
+
+    if(correct){
+
+        /* Add symbol */
+
+        const symbol =
+        questions[currentQuestion].symbol;
+
+
+        const symbolBox =
+        document.createElement("div");
+
+
+        symbolBox.className="symbol";
+
+
+        symbolBox.innerHTML =
+        symbol;
+
+
+        reveal.appendChild(symbolBox);
+
+
+        currentQuestion++;
+
+
+        if(currentQuestion < questions.length){
+
+            setTimeout(() => {
+
+                showQuestion();
+
+            },500);
+
         }
 
-        function toggleMode() {
-            document.body.classList.toggle("dark-mode");
+        else{
+
+            setTimeout(() => {
+
+                quiz.style.display="none";
+
+                final.style.display="block";
+
+                createHearts();
+
+            },700);
+
         }
-    </script>
+
+    }
+
+    else{
+
+        alert("Oops! Try again 😜❤️");
+
+    }
+
+}
+
+
+
+/* SHOW LETTER */
+
+function showLetter(){
+
+    final.style.display="none";
+
+    letter.style.display="block";
+
+}
+
+
+
+/* BACK TO FINAL */
+
+function backToFinal(){
+
+    letter.style.display="none";
+
+    final.style.display="block";
+
+}
+
+
+
+/* HEARTS */
+
+function createHearts(){
+
+    const rect =
+    final.getBoundingClientRect();
+
+
+    const startX =
+    rect.left + rect.width / 2;
+
+
+    const startY =
+    rect.top + rect.height / 2;
+
+
+    const hearts=[
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "💘",
+        "💝"
+    ];
+
+
+    for(let i=0;i<250;i++){
+
+        const heart =
+        document.createElement("div");
+
+
+        heart.className="heart";
+
+
+        heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random()*hearts.length
+            )
+        ];
+
+
+        heart.style.left =
+        startX+"px";
+
+
+        heart.style.top =
+        startY+"px";
+
+
+        heart.style.fontSize =
+        (15+Math.random()*35)+"px";
+
+
+        const angle =
+        Math.random()*Math.PI*2;
+
+
+        const distance =
+        200+Math.random()*700;
+
+
+        heart.style.setProperty(
+            "--x",
+            Math.cos(angle)*distance
+        );
+
+
+        heart.style.setProperty(
+            "--y",
+            Math.sin(angle)*distance
+        );
+
+
+        heart.style.animationDuration =
+        (2+Math.random()*2)+"s";
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        },4000);
+
+    }
+
+}
+
+
+
+/* RESTART */
+
+function restart(){
+
+    final.style.display="none";
+
+    letter.style.display="none";
+
+    quiz.style.display="none";
+
+    start.style.display="block";
+
+    currentQuestion=0;
+
+    reveal.innerHTML="";
+
+}
+
+</script>
+
 </body>
 </html>
